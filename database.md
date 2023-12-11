@@ -36,7 +36,6 @@ CREATE TABLE Users (
     AvatarUrl VARCHAR(255),
     Nickname VARCHAR(50),
     news_preferences TEXT,  -- JSON格式，存储用户的新闻偏好
-    browsing_history TEXT,  -- JSON格式或者使用外键关联到一个浏览历史表
     comment_history TEXT,  -- JSON格式或者使用外键关联到一个评论历史表
     LastLogin DATETIME,
     PRIMARY KEY (UserID),
@@ -44,21 +43,20 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE UserFavorites (
-    UserFavID Int AUTO_INCREMENT, 
+    UserFavID Int AUTO_INCREMENT,
     UserID INT,
     NewsID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (NewsID) REFERENCES News(NewsID)
-)
+);
 
 CREATE TABLE UserBrowsingHistory (
-    UserID INT, 
+    UserID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
-)
+);
 
 
 ```
-
 
 ### 内容表
 
@@ -70,7 +68,7 @@ CREATE TABLE News (
     PublishDatetime DATETIME,
     Author VARCHAR(100),
     Body TEXT,
-    ViewCount INT DEFAULT 0,  
+    ViewCount INT DEFAULT 0,
     FavoriteCount INT DEFAULT 0,  -- 这种索引信息是否应当记录在表中，还是每一次查看时索引？（可能得看查看频率是否高再进行选择？）
     ShareCount INT DEFAULT 0,
     PaidPromotion BOOLEAN DEFAULT FALSE,
@@ -79,6 +77,25 @@ CREATE TABLE News (
 ```
 
 ### 评论表
+
+```sql
+CREATE TABLE Comments (
+    CommentID INT,
+    UserID INT,
+    NewsID INT,
+    Content TEXT,
+    CommentTime DATETIME,
+    ReferenceCommentID INT,
+    NumLikes INT,
+    NumDislikes INT,
+    PRIMARY KEY (CommentID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (NewsID) REFERENCES News(NewsID),
+    FOREIGN KEY (ReferenceCommentID) REFERENCES Comments(CommentID)
+);
+```
+
+非关系型数据库实现：
 
 ```json
 {
@@ -192,9 +209,41 @@ VALUES (1, 1);  -- 假设用户ID是1，新闻ID是1
 ```
 
 - 用户对新闻评论
+
+```sql
+INSERT INTO Comments (UserID, NewsID, Content)
+VALUES (1, 1, "这是一条评论");
+```
+
 - 用户对评论进行点赞/点踩
+
+```sql
+-- 点赞
+UPDATE Comments
+SET NumLikes = NumLikes + 1
+WHERE CommentID = 1;
+
+-- 点踩
+UPDATE Comments
+SET NumDislikes = NumDislikes + 1
+WHERE CommentID = 1;
+```
+
+> 是否需要记录是哪个用户点了赞？
+
 - 用户删除自己的评论
+
+```sql
+DELETE FROM Comments WHERE UserID = 123 AND CommentID = 1;  -- 删除指定的评论
+```
+
 - 用户在个人页中观看自己的评论历史
+
+```sql
+SELECT * FROM Comments
+WHERE UserID = 1
+ORDER BY CommentTime DESC;
+```
 
 - 用户在个人页中观看自己的浏览历史
 
@@ -229,4 +278,4 @@ VALUES ('广告标题', '广告文本内容', '图像链接', 'homepage', 1, '20
 
 - 如何关联 MySQL 和 MongoDB？
 - 用户账号的密码该如何存储？用什么格式？
-
+- 用户偏好是什么样的格式？是多选新闻的类别吗？
