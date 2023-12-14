@@ -35,11 +35,11 @@ CREATE TABLE Users (
     PhoneNumber VARCHAR(15),
     AvatarUrl VARCHAR(255),
     Nickname VARCHAR(50),
-    news_preferences TEXT,  -- JSON格式，存储用户的新闻偏好
-    comment_history TEXT,  -- JSON格式或者使用外键关联到一个评论历史表
+    NewsPreferences TEXT,  -- JSON格式，存储用户的新闻偏好
+    CommentHistory TEXT,  -- JSON格式或者使用外键关联到一个评论历史表
     LastLogin DATETIME,
     PRIMARY KEY (UserID),
-    FOREIGN KEY ()
+    FOREIGN KEY () REFERENCES 
 );
 
 CREATE TABLE UserFavorites (
@@ -135,7 +135,7 @@ CREATE TABLE Advertisements (
 CREATE TABLE Advertiser (
     AdvertiserID INT AUTO_INCREMENT,
     PRIMARY KEY (AdvertiserID)
-)
+);
 ```
 
 ## 常见场景及其 SQL 指令

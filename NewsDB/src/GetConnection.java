@@ -19,7 +19,7 @@ public class GetConnection {
         //调用DriverManager对象的getConnection()方法，获得一个Connection对象
         Connection conn;
         try {
-            conn = DriverManager.getConnection(url,    "root","Tian3990113");//url 账号 密码
+            conn = DriverManager.getConnection(url,"root","Tian3990113");//url 账号 密码
             //创建一个Statement对象
             Statement stmt = conn.createStatement(); //创建Statement对象
             System.out.print("成功连接到数据库！");
