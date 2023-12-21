@@ -27,19 +27,21 @@ MongoDB 进行配合维护。
 
 ## 创建表单
 
+Tips: 
+- 表的列名最好使用下划线命名法，因为MySQL在windows下，忽略大小写。
+- ID字段一般使用BigInt来定义
+
 ### 用户表
 
 ```sql
-CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT,
-    PhoneNumber VARCHAR(15),
-    AvatarUrl VARCHAR(255),
-    Nickname VARCHAR(50),
-    NewsPreferences TEXT,  -- JSON格式，存储用户的新闻偏好
-    CommentHistory TEXT,  -- JSON格式或者使用外键关联到一个评论历史表
-    LastLogin DATETIME,
-    PRIMARY KEY (UserID),
-    FOREIGN KEY () REFERENCES 
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT,
+    phone_number VARCHAR(15),
+    avatar_url VARCHAR(255),
+    nickname VARCHAR(50),
+    news_preferences TEXT,  -- JSON格式，存储用户的新闻偏好
+    last_login DATETIME,
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE UserFavorites (
@@ -54,7 +56,6 @@ CREATE TABLE UserBrowsingHistory (
     UserID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
 
 ```
 
@@ -92,6 +93,15 @@ CREATE TABLE Comments (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (NewsID) REFERENCES News(NewsID),
     FOREIGN KEY (ReferenceCommentID) REFERENCES Comments(CommentID)
+);
+
+CREATE TABLE CommentHistory (
+    UserCommentID INT AUTO_INCREMENT,
+    CommentID INT,
+    UserID INT,
+    PRIMARY KEY (UserCommentID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (CommentID) REFERENCES Comments(CommentID)
 );
 ```
 
