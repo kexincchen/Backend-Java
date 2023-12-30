@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// 仅仅用于检测数据库是否reachable
 public class GetConnection {
 
     public static void main(String[] args){

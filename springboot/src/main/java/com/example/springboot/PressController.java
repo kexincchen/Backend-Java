@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
@@ -19,9 +20,9 @@ public class PressController {
     private PressService pressService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Press> getPressById(@PathVariable int id) {
-        Optional<Press> press = pressService.getPressById(id);
-        return press.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public String getPressById(@PathVariable int id) throws SQLException {
+        Press press = pressService.getPressById(id);
+        return press.toString();
     }
 
     @GetMapping("/test")

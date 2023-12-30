@@ -1,7 +1,7 @@
 package com.example.springboot;
 
 public class Press {
-    private int id;
+    private final int id;
     private String title;
     private String content;
 
@@ -11,6 +11,7 @@ public class Press {
         this.title = title;
         this.content = content;
     }
+
 
     public int getId() {
         return id;
@@ -24,6 +25,17 @@ public class Press {
         return title;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "{{'id': " + id + "}, {'title': " + title + "}, {'body': " + content + "}}";
+    }
 }
 
