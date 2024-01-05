@@ -1,6 +1,6 @@
 package com.example.springboot.Controller;
 
-import com.example.springboot.Object.Press;
+import com.example.springboot.Entity.Press;
 import com.example.springboot.Service.PressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

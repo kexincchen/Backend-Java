@@ -1,6 +1,6 @@
 package com.example.springboot;
 
-import com.example.springboot.Object.Press;
+import com.example.springboot.Entity.Press;
 import com.example.springboot.Mapper.PressMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,14 +1,14 @@
-package com.example.springboot.Object;
+package com.example.springboot.Entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("`News`")
+@TableName("News")
 public class Press {
     @TableId
-    private final Long newsid;
+    private Long newsid;
     private String title;
     private String body;
 
@@ -18,6 +18,10 @@ public class Press {
         this.body = body;
     }
 
+    public Press(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
 
     public Long getId() {
         return newsid;
@@ -41,7 +45,7 @@ public class Press {
 
     @Override
     public String toString() {
-        return "{{'id': " + newsid + "}, {'title': " + title + "}, {'body': " + body + "}}";
+        return "{'id': " + newsid + ", 'title': " + title + ", 'body': " + body + "}";
     }
 }
 
