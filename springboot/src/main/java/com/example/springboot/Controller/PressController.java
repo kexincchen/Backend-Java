@@ -1,16 +1,15 @@
-package com.example.springboot;
+package com.example.springboot.Controller;
 
-import com.example.springboot.Press;
-import com.example.springboot.PressService;
+import com.example.springboot.Object.Press;
+import com.example.springboot.Service.PressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/press")
@@ -20,9 +19,22 @@ public class PressController {
     private PressService pressService;
 
     @GetMapping("/{id}")
-    public String getPressById(@PathVariable int id) throws SQLException {
+    public String getPressById(@PathVariable Long id) throws SQLException {
         Press press = pressService.getPressById(id);
-        return press.toString();
+        if (press != null){
+            return press.toString();
+        }
+        return "";
+    }
+
+    @GetMapping("/all")
+    public String getAllPress() {
+        List<Press> presses = pressService.getAllPress();
+        System.out.println(presses);
+        if (presses != null){
+            return presses.toString();
+        }
+        return "";
     }
 
     @GetMapping("/test")

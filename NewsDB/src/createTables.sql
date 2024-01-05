@@ -1,5 +1,5 @@
 CREATE TABLE News (
-    NewsID INT AUTO_INCREMENT,
+    NewsID BIGINT AUTO_INCREMENT,
     Title VARCHAR(255),
     CoverImageUrl VARCHAR(255),
     PublishDatetime DATETIME,
@@ -13,12 +13,12 @@ CREATE TABLE News (
 );
 
 CREATE TABLE Comments (
-    CommentID INT AUTO_INCREMENT,
-    UserID INT,
-    NewsID INT,
+    CommentID BIGINT AUTO_INCREMENT,
+    UserID BIGINT,
+    NewsID BIGINT,
     Content TEXT,
     CommentTime DATETIME,
-    ReferenceCommentID INT,
+    ReferenceCommentID BIGINT,
     NumLikes INT,
     NumDislikes INT,
     PRIMARY KEY (CommentID),
@@ -28,7 +28,7 @@ CREATE TABLE Comments (
 );
 
 CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT,
+    UserID BIGINT AUTO_INCREMENT,
     PhoneNumber VARCHAR(15),
     AvatarUrl VARCHAR(255),
     Nickname VARCHAR(50),
@@ -38,45 +38,45 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE UserFavorites (
-    UserFavID Int AUTO_INCREMENT,
-    UserID INT,
-    NewsID INT,
+    UserFavID BIGINT AUTO_INCREMENT,
+    UserID BIGINT,
+    NewsID BIGINT,
     PRIMARY KEY (UserFavID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (NewsID) REFERENCES News(NewsID)
 );
 
 CREATE TABLE UserBrowsingHistory (
-    UserBrowsingID INT AUTO_INCREMENT,
-    UserID INT,
-    NewsID INT,
+    UserBrowsingID BIGINT AUTO_INCREMENT,
+    UserID BIGINT,
+    NewsID BIGINT,
     PRIMARY KEY (UserBrowsingID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (NewsID) REFERENCES News(NewsID)
 );
 
 CREATE TABLE CommentHistory (
-    UserCommentID INT AUTO_INCREMENT,
-    CommentID INT,
-    UserID INT,
+    UserCommentID BIGINT AUTO_INCREMENT,
+    CommentID BIGINT,
+    UserID BIGINT,
     PRIMARY KEY (UserCommentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (CommentID) REFERENCES Comments(CommentID)
 );
 
 CREATE TABLE Advertiser (
-    AdvertiserID INT AUTO_INCREMENT,
+    AdvertiserID BIGINT AUTO_INCREMENT,
     Name VARCHAR(255),
     PRIMARY KEY (AdvertiserID)
 );
 
 CREATE TABLE Advertisements (
-    AdID INT AUTO_INCREMENT,
+    AdID BIGINT AUTO_INCREMENT,
     Title VARCHAR(255),
     TextContent TEXT,
     ImageUrl VARCHAR(255),
     Placement ENUM('splash', 'popup', 'homepage', 'comment', 'article', 'article_end', 'related_news'),
-    AdvertiserID INT,
+    AdvertiserID BIGINT,
     ValidUntil DATETIME,
     RegionRestriction TEXT,
     DeviceRestriction TEXT,
