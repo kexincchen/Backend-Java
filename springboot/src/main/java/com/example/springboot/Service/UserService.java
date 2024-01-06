@@ -6,15 +6,18 @@ import com.example.springboot.Mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserMapper userMapper;
 
-    public void registerNewUser(String nickname, String phoneNum) {
-        User user = new User(nickname, phoneNum);
+    public User registerNewUser(String nickname, String phoneNumber) {
+        User user = new User(nickname, phoneNumber);
         userMapper.insert(user);
+        return user;
     }
 
     public void updateUserNickname(Long id, String nickname) {
@@ -29,5 +32,9 @@ public class UserService {
         } else {
             throw new IllegalStateException("User not found with id: " + id);
         }
+    }
+
+    public List<User> getAllUsers(){
+        return userMapper.selectList(null);
     }
 }

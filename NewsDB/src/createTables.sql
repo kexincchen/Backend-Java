@@ -12,6 +12,16 @@ CREATE TABLE News (
     PRIMARY KEY (NewsID)
 );
 
+CREATE TABLE Users (
+   UserID BIGINT AUTO_INCREMENT,
+   PhoneNumber VARCHAR(15),
+   AvatarUrl VARCHAR(255),
+   Nickname VARCHAR(50),
+   NewsPreferences TEXT,  -- JSON格式，存储用户的新闻偏好
+   LastLogin DATETIME,
+   PRIMARY KEY (UserID)
+);
+
 CREATE TABLE Comments (
     CommentID BIGINT AUTO_INCREMENT,
     UserID BIGINT,
@@ -25,16 +35,6 @@ CREATE TABLE Comments (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (NewsID) REFERENCES News(NewsID),
     FOREIGN KEY (ReferenceCommentID) REFERENCES Comments(CommentID)
-);
-
-CREATE TABLE Users (
-    UserID BIGINT AUTO_INCREMENT,
-    PhoneNumber VARCHAR(15),
-    AvatarUrl VARCHAR(255),
-    Nickname VARCHAR(50),
-    NewsPreferences TEXT,  -- JSON格式，存储用户的新闻偏好
-    LastLogin DATETIME,
-    PRIMARY KEY (UserID)
 );
 
 CREATE TABLE UserFavorites (

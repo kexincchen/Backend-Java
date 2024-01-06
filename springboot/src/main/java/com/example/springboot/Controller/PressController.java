@@ -3,10 +3,9 @@ package com.example.springboot.Controller;
 import com.example.springboot.Entity.Press;
 import com.example.springboot.Service.PressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,22 +18,22 @@ public class PressController {
     private PressService pressService;
 
     @GetMapping("/{id}")
-    public String getPressById(@PathVariable Long id) throws SQLException {
+    public ResponseEntity<String> getPressById(@PathVariable Long id) {
         Press press = pressService.getPressById(id);
         if (press != null){
-            return press.toString();
+            return ResponseEntity.ok(press.toString());
         }
-        return "";
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Press not found");
     }
 
     @GetMapping("/all")
-    public String getAllPress() {
+    public ResponseEntity<String> getAllPress() {
         List<Press> presses = pressService.getAllPress();
         System.out.println(presses);
         if (presses != null){
-            return presses.toString();
+            return ResponseEntity.ok(presses.toString());
         }
-        return "";
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Press not found");
     }
 
     @GetMapping("/test")
@@ -42,6 +41,27 @@ public class PressController {
         return "Success!";
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<String> addNewPress(@RequestParam String title, @RequestParam String body){
+        try {
+            Press press = pressService.insertNewPress(title, body);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Press posted successfully. \nID: " + press.getId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error posting press: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updatePress(@PathVariable Long id, @RequestParam String title, @RequestParam String body){
+        try {
+            pressService.updatePress(id, title, body);
+            return ResponseEntity.ok("Press updated successfully");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating press: " + e.getMessage());
+        }
+    }
 
 }
 

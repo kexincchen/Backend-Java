@@ -21,9 +21,10 @@ public class AdvertisementController {
                                               @RequestParam String textContent,
                                               @RequestParam String placement) {
         try {
-            advertisementService.insertNewAd(title, textContent, placement);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Advertisement created successfully");
+            Advertisement ad = advertisementService.insertNewAd(title, textContent, placement);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Advertisement created successfully. \nID: " + ad.getAdid());
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating advertisement: " + e.getMessage());
         }
     }
@@ -42,11 +43,12 @@ public class AdvertisementController {
     public ResponseEntity<String> clickAdByID(@PathVariable Long id) {
         try {
             advertisementService.clickAdByID(id);
-            return ResponseEntity.ok("Advertisement liked successfully");
+            return ResponseEntity.ok("Advertisement clicked successfully");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error liking advertisement: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error clicking advertisement: " + e.getMessage());
         }
     }
 }

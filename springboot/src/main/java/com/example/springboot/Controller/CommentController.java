@@ -16,21 +16,23 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping
-    public ResponseEntity<List<Comment>> getAllComments() {
+    @GetMapping("/all")
+    public ResponseEntity<String> getAllComments() {
         try {
             List<Comment> comments = commentService.getAllComments();
-            return ResponseEntity.ok(comments);
+            System.out.println(comments);
+            return ResponseEntity.ok(comments.toString());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting all comments");
         }
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> insertNewComment(@RequestParam String content, @RequestParam Long newsID, @RequestParam Long userID) {
         try {
-            commentService.insertNewComment(content, newsID, userID);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Comment added successfully");
+            Comment comment = commentService.insertNewComment(content, newsID, userID);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Comment added successfully. \nID: " + comment.getCommentid());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding comment: " + e.getMessage());
         }

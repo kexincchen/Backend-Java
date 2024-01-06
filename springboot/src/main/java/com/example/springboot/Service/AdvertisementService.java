@@ -13,8 +13,10 @@ public class AdvertisementService {
     @Autowired
     private AdvertisementMapper advertisementMapper;
 
-    public void insertNewAd(String title, String textContent, String placement){
-        advertisementMapper.insert(new Advertisement(title, textContent, Placement.valueOf(placement)));
+    public Advertisement insertNewAd(String title, String textContent, String placement){
+        Advertisement ad = new Advertisement(title, textContent, placement);
+        advertisementMapper.insert(ad);
+        return ad;
     }
 
     public List<Advertisement> getAdByType(String placement){

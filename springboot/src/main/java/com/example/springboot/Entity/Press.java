@@ -1,5 +1,6 @@
 package com.example.springboot.Entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -7,10 +8,13 @@ import lombok.Data;
 @Data
 @TableName("News")
 public class Press {
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long newsid;
     private String title;
     private String body;
+
+    public Press() {
+    }
 
     public Press(Long id, String title, String body) {
         this.newsid = id;
@@ -21,6 +25,10 @@ public class Press {
     public Press(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public void setNewsid(Long newsid) {
+        this.newsid = newsid;
     }
 
     public Long getId() {

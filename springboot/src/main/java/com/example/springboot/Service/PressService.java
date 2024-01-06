@@ -21,8 +21,10 @@ public class PressService {
         return pressMapper.selectById(id);
     }
 
-    public void insertNewPress(String title, String body){
-        pressMapper.insert(new Press(title, body));
+    public Press insertNewPress(String title, String body){
+        Press press = new Press(title, body);
+        pressMapper.insert(press);
+        return press;
     }
 
     public void updatePress(Long id, String newTitle, String newBody) {

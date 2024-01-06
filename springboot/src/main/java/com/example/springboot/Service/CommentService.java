@@ -16,8 +16,10 @@ public class CommentService {
         return commentMapper.selectList(null);
     }
 
-    public void insertNewComment(String content, Long newsID, Long userID) {
-        commentMapper.insert(new Comment(content, newsID, userID));
+    public Comment insertNewComment(String content, Long newsID, Long userID) {
+        Comment comment = new Comment(content, newsID, userID);
+        commentMapper.insert(comment);
+        return comment;
     }
 
     public void deleteCommentByID(Long cid){
