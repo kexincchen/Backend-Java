@@ -18,33 +18,19 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerNewUser(@RequestParam String nickname, @RequestParam String phoneNumber) {
-        try {
-            User user = userService.registerNewUser(nickname, phoneNumber);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully. \nID: " + user.getUserid());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user: " + e.getMessage());
-        }
+        User user = userService.registerNewUser(nickname, phoneNumber);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully. \nID: " + user.getUserid());
     }
 
     @PutMapping("/{id}/update-nickname")
     public ResponseEntity<String> updateUserNickname(@PathVariable Long id, @RequestParam String nickname) {
-        try {
-            userService.updateUserNickname(id, nickname);
-            return ResponseEntity.ok("User nickname updated successfully");
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user: " + e.getMessage());
-        }
+        userService.updateUserNickname(id, nickname);
+        return ResponseEntity.ok("User nickname updated successfully");
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
-        try {
-            List<User> users = userService.getAllUsers();
-            return ResponseEntity.ok(users);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 }

@@ -18,33 +18,20 @@ public class CommentController {
 
     @GetMapping("/all")
     public ResponseEntity<String> getAllComments() {
-        try {
-            List<Comment> comments = commentService.getAllComments();
-            System.out.println(comments);
-            return ResponseEntity.ok(comments.toString());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting all comments");
-        }
+        List<Comment> comments = commentService.getAllComments();
+        System.out.println(comments);
+        return ResponseEntity.ok(comments.toString());
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> insertNewComment(@RequestParam String content, @RequestParam Long newsID, @RequestParam Long userID) {
-        try {
-            Comment comment = commentService.insertNewComment(content, newsID, userID);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Comment added successfully. \nID: " + comment.getCommentid());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding comment: " + e.getMessage());
-        }
+        Comment comment = commentService.insertNewComment(content, newsID, userID);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Comment added successfully. \nID: " + comment.getCommentid());
     }
 
     @DeleteMapping("/{cid}")
     public ResponseEntity<String> deleteCommentByID(@PathVariable Long cid) {
-        try {
-            commentService.deleteCommentByID(cid);
-            return ResponseEntity.ok("Comment deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting comment: " + e.getMessage());
-        }
+        commentService.deleteCommentByID(cid);
+        return ResponseEntity.ok("Comment deleted successfully");
     }
 }

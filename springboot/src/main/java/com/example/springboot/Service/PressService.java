@@ -7,48 +7,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class PressService {
+public interface PressService {
 
-    @Autowired
-    private PressMapper pressMapper;
+    List<Press> getAllPress();
 
-    public List<Press> getAllPress(){
-        return pressMapper.selectList(null);
-    }
+    Press getPressById(Long id);
 
-    public Press getPressById(Long id){
-        return pressMapper.selectById(id);
-    }
+    Press insertNewPress(String title, String body);
 
-    public Press insertNewPress(String title, String body){
-        Press press = new Press(title, body);
-        pressMapper.insert(press);
-        return press;
-    }
+    void updatePress(Long id, String newTitle, String newBody);
 
-    public void updatePress(Long id, String newTitle, String newBody) {
-        // Fetch the existing press record
-        Press press = pressMapper.selectById(id);
+    Press getPressWithAdvertisements(Long id);
 
-        if (press != null) {
-            // Update the title and body
-            press.setTitle(newTitle);
-            press.setBody(newBody);
-
-            // Persist the changes
-            pressMapper.updateById(press);
-        } else {
-            throw new IllegalStateException("Press not found with id: " + id);
-        }
-    }
-
-    public Press getPressWithAdvertisements(Long id) {
-        return pressMapper.selectPressWithAdvertisements(id);
-    }
-
-    public List<Press> getAllPressWithAdvertisements() {
-        return pressMapper.selectAllPressWithAdvertisements();
-    }
+    List<Press> getAllPressWithAdvertisements();
 
 }

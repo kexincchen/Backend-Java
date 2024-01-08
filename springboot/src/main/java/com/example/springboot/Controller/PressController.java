@@ -24,7 +24,7 @@ public class PressController {
         if (press != null){
             return ResponseEntity.ok(press.toString());
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Press not found");
+        throw new IllegalStateException("Press not found");
     }
 
     @GetMapping("/all")
@@ -35,36 +35,19 @@ public class PressController {
         if (presses != null){
             return ResponseEntity.ok(presses.toString());
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Press not found");
-    }
-
-    @GetMapping("/test")
-    public String printSuccess() {
-        return "Success!";
+        throw new IllegalStateException("No press records found");
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addNewPress(@RequestParam String title, @RequestParam String body){
-        try {
-            Press press = pressService.insertNewPress(title, body);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Press posted successfully. \nID: " + press.getId());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error posting press: " + e.getMessage());
-        }
+        Press press = pressService.insertNewPress(title, body);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Press posted successfully. \nID: " + press.getId());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updatePress(@PathVariable Long id, @RequestParam String title, @RequestParam String body){
-        try {
-            pressService.updatePress(id, title, body);
-            return ResponseEntity.ok("Press updated successfully");
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating press: " + e.getMessage());
-        }
+        pressService.updatePress(id, title, body);
+        return ResponseEntity.ok("Press updated successfully");
     }
-
-
 }
 
