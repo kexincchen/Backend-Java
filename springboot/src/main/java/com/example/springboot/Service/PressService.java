@@ -43,4 +43,12 @@ public class PressService {
         }
     }
 
+    public Press getPressWithAdvertisements(Long id) {
+        return pressMapper.selectPressWithAdvertisements(id);
+    }
+
+    public List<Press> getAllPressWithAdvertisements() {
+        return pressMapper.selectAllPressWithAdvertisements();
+    }
+
 }

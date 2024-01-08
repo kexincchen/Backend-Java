@@ -1,9 +1,13 @@
 package com.example.springboot.Entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @TableName("News")
@@ -12,6 +16,8 @@ public class Press {
     private Long newsid;
     private String title;
     private String body;
+    @TableField(exist = false)
+    private List<Advertisement> advertisements;
 
     public Press() {
     }
@@ -53,7 +59,16 @@ public class Press {
 
     @Override
     public String toString() {
-        return "{'id': " + newsid + ", 'title': " + title + ", 'body': " + body + "}";
+        String adDetails = advertisements == null ? "No advertisements" :
+                advertisements.stream()
+                        .map(Advertisement::toString)
+                        .collect(Collectors.joining(", "));
+        return "{" +
+                "newsid=" + newsid +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", advertisements=[" + adDetails + "]" +
+                '}';
     }
 }
 

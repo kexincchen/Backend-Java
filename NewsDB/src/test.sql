@@ -16,4 +16,18 @@ SHOW TABLES;
 --
 -- SET FOREIGN_KEY_CHECKS = 1; -- Re-enable foreign key checks
 
-SELECT * FROM Advertisements;
+-- SELECT * FROM Advertisements;
+
+
+-- ALTER TABLE News
+-- ADD COLUMN AdID BIGINT;
+--
+-- ALTER TABLE News
+-- ADD CONSTRAINT AdID
+-- FOREIGN KEY (AdID) REFERENCES Advertisements(AdID);
+
+SELECT * FROM News;
+
+
+SELECT * FROM Advertisements WHERE newsid = 1;
+

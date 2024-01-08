@@ -19,9 +19,10 @@ public class AdvertisementController {
     @PostMapping("/add")
     public ResponseEntity<String> insertNewAd(@RequestParam String title,
                                               @RequestParam String textContent,
-                                              @RequestParam String placement) {
+                                              @RequestParam String placement,
+                                              @RequestParam Long newsId) {
         try {
-            Advertisement ad = advertisementService.insertNewAd(title, textContent, placement);
+            Advertisement ad = advertisementService.insertNewAd(title, textContent, placement, newsId);
             return ResponseEntity.status(HttpStatus.CREATED).body("Advertisement created successfully. \nID: " + ad.getAdid());
         } catch (Exception e) {
             System.out.println(e);

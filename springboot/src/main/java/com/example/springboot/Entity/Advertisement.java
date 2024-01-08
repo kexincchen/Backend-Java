@@ -18,14 +18,17 @@ public class Advertisement {
     @TableField("ClickCount")
     private Integer clickCount;
 
+    private Long newsid;
+
     public Advertisement() {
     }
 
-    public Advertisement(String title, String textContent, String placement) {
+    public Advertisement(String title, String textContent, String placement, Long newsid) {
         this.title = title;
         this.textContent = textContent;
         this.placement = Placement.fromString(placement);
         this.clickCount = 0;
+        this.newsid = newsid;
     }
 
     public void clickOnce(){
@@ -50,5 +53,16 @@ public class Advertisement {
 
     public void setClickCount(Integer clickCount) {
         this.clickCount = clickCount;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "adid=" + adid +
+                ", title='" + title + '\'' +
+                ", textContent='" + textContent + '\'' +
+                ", placement=" + placement +
+                ", clickCount=" + clickCount +
+                '}';
     }
 }

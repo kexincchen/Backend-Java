@@ -19,7 +19,8 @@ public class PressController {
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getPressById(@PathVariable Long id) {
-        Press press = pressService.getPressById(id);
+//        Press press = pressService.getPressById(id);
+        Press press = pressService.getPressWithAdvertisements(id);
         if (press != null){
             return ResponseEntity.ok(press.toString());
         }
@@ -28,7 +29,8 @@ public class PressController {
 
     @GetMapping("/all")
     public ResponseEntity<String> getAllPress() {
-        List<Press> presses = pressService.getAllPress();
+//        List<Press> presses = pressService.getAllPress();
+        List<Press> presses = pressService.getAllPressWithAdvertisements();
         System.out.println(presses);
         if (presses != null){
             return ResponseEntity.ok(presses.toString());
@@ -62,6 +64,7 @@ public class PressController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating press: " + e.getMessage());
         }
     }
+
 
 }
 

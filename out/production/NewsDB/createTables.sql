@@ -83,7 +83,9 @@ CREATE TABLE Advertisements (
     ClickCount INT DEFAULT 0,
     ExposureCount INT DEFAULT 0,
     Weight INT DEFAULT 0,
+    NewsID BIGINT,
     PRIMARY KEY (AdID),
-    FOREIGN KEY (AdvertiserID) REFERENCES Advertiser(AdvertiserID)
+    FOREIGN KEY (AdvertiserID) REFERENCES Advertiser(AdvertiserID),
+    FOREIGN KEY (NewsID) REFERENCES News(NewsID)
 );
 

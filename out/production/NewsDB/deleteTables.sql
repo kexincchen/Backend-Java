@@ -1,9 +1,5 @@
-DROP TABLE Advertisements;
-DROP TABLE Advertiser;
-DROP TABLE CommentHistory;
-DROP TABLE Comments;
-DROP TABLE UserFavorites;
-DROP TABLE News;
-DROP TABLE UserBrowsingHistory;
-DROP TABLE Users;
+SET FOREIGN_KEY_CHECKS = 0; -- For MySQL, disables foreign key checks
 
+DROP TABLE Advertisements, Advertiser, CommentHistory, Comments, News, UserBrowsingHistory, UserFavorites, Users; -- List all tables
+
+SET FOREIGN_KEY_CHECKS = 1; -- Re-enable foreign key checks
