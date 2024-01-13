@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public User registerNewUser(String nickname, String phoneNumber) {
-        User user = new User(nickname, phoneNumber);
+    public User registerNewUser(String nickname, String phoneNumber, String password) {
+        User user = new User(nickname, phoneNumber, password);
         userMapper.insert(user);
         return user;
     }
@@ -34,5 +34,10 @@ public class UserServiceImpl implements UserService {
 
     public List<User> getAllUsers() {
         return userMapper.selectList(null);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userMapper.findByUsername(username);
     }
 }

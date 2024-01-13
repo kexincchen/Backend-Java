@@ -11,11 +11,14 @@ import lombok.Data;
 public class User {
     @TableId(type = IdType.AUTO)
     private Long userid;
-    private String nickname;
+    private String nickname;  // username
     @TableField("PhoneNumber")
     private String phoneNumber;
     @TableField("LastLogin")
     private String lastLogin;
+    private String password;  // TODO: Encrypt then set
+    private String role;
+
     // No-argument constructor
     public User() {
     }
@@ -23,6 +26,20 @@ public class User {
     public User(String nickname, String phoneNumber){
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(String nickname, String phoneNumber, String password){
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setNickname(String nickname) {
@@ -39,5 +56,13 @@ public class User {
 
     public void setUserid(Long userid) {
         this.userid = userid;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

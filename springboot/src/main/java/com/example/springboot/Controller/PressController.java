@@ -5,9 +5,9 @@ import com.example.springboot.Service.PressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -38,6 +38,7 @@ public class PressController {
         throw new IllegalStateException("No press records found");
     }
 
+    @PreAuthorize("hasAnyRole('admin')")
     @PostMapping("/add")
     public ResponseEntity<String> addNewPress(@RequestParam String title, @RequestParam String body){
         Press press = pressService.insertNewPress(title, body);
