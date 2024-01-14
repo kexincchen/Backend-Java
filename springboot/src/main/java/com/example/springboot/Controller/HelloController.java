@@ -1,6 +1,8 @@
 package com.example.springboot.Controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -19,12 +21,15 @@ public class HelloController {
     }
 
     @GetMapping("/admin/hello")
+    @PreAuthorize("hasRole('ADMIN')")
     public String admin() {
         return "admin";
     }
 
     @GetMapping("/user/hello")
+    @PreAuthorize("hasRole('USER')")
     public String user() {
         return "user";
     }
+
 }

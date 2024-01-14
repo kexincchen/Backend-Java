@@ -40,4 +40,17 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userMapper.findByUsername(username);
     }
+
+    @Override
+    public void authorizeByID(Long id, String role) {
+        User user = userMapper.selectById(id);
+
+        if (user == null) {
+            throw new IllegalStateException("User not found with id: " + id);
+        }
+        // Update the nickname
+        user.setRole(role);
+        // Persist the changes
+        userMapper.updateById(user);
+    }
 }

@@ -26,8 +26,21 @@ SHOW TABLES;
 -- ADD CONSTRAINT AdID
 -- FOREIGN KEY (AdID) REFERENCES Advertisements(AdID);
 
-SELECT * FROM News;
+-- SELECT * FROM News;
 
 
-SELECT * FROM Advertisements WHERE newsid = 1;
+-- SELECT * FROM Advertisements WHERE newsid = 1;
 
+-- ALTER TABLE Users
+-- ADD COLUMN Password VARCHAR(255);
+--
+-- ALTER TABLE Users
+-- ADD COLUMN Role VARCHAR(10);
+
+INSERT INTO Users (Nickname, Password, Role)
+VALUES ('user', 'user', 'USER');
+
+INSERT INTO Users (Nickname, Password, Role)
+VALUES ('admin', 'admin', 'ADMIN');
+
+    SELECT * FROM Users;

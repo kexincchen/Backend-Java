@@ -33,4 +33,10 @@ public class UserController {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @PutMapping("{id}/authorize")
+    public ResponseEntity<String> updateUserRole(@PathVariable Long id, @RequestParam String role) {
+        userService.authorizeByID(id, role);
+        return ResponseEntity.ok("User role updated successfully");
+    }
 }

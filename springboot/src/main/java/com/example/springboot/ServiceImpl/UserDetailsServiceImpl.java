@@ -3,6 +3,7 @@ package com.example.springboot.ServiceImpl;
 import com.example.springboot.Entity.User;
 import com.example.springboot.Service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
+    @Autowired
     UserService userService;
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.springboot.Service;
 
+import com.example.springboot.Entity.Role;
 import com.example.springboot.Entity.User;
 
 import java.util.List;
@@ -13,4 +14,9 @@ public interface UserService {
     List<User> getAllUsers();
 
     User findByUsername(String username);
+
+    void authorizeByID(Long id, String role);
+
+
+
 }

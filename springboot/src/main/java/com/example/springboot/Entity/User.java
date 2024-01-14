@@ -11,7 +11,7 @@ import lombok.Data;
 public class User {
     @TableId(type = IdType.AUTO)
     private Long userid;
-    private String nickname;  // username
+    private String nickname;  // TODO: set username unique
     @TableField("PhoneNumber")
     private String phoneNumber;
     @TableField("LastLogin")
@@ -26,12 +26,14 @@ public class User {
     public User(String nickname, String phoneNumber){
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+        this.role = "USER";
     }
 
     public User(String nickname, String phoneNumber, String password){
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.role = "USER";
     }
 
     public String getPassword() {
@@ -43,6 +45,9 @@ public class User {
     }
 
     public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public void setUsername(String nickname) {
         this.nickname = nickname;
     }
 
