@@ -36,6 +36,10 @@ public class User {
         this.role = "USER";
     }
 
+    public String getUsername() {
+        return nickname;
+    }
+
     public String getPassword() {
         return password;
     }

@@ -1,4 +1,4 @@
-package com.example.springboot;
+package com.example.springboot.Util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

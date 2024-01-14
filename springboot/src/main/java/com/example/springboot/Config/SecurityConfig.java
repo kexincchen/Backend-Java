@@ -1,7 +1,5 @@
 package com.example.springboot.Config;
 
-//import com.example.springboot.CustomOAuth2UserService;
-import com.example.springboot.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,23 +15,46 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity
+@EnableWebSecurity// 开启网络安全注解
 public class SecurityConfig {
+//    @Autowired
+//    CustomOAuth2UserService userService;
+
+    // 将自定义JwtAuthenticationFilter注入
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -50,6 +71,19 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
+//                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(oauth2 -> oauth2
+
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .oidcUserService(this.oidcUserService())
+                    )
+                )
+                .oauth2ResourceServer((oauth2) -> oauth2
+                        .jwt(Customizer.withDefaults())
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 //                .formLogin(form -> form
 //                        .loginProcessingUrl("/login")
 //                        .usernameParameter("username")
@@ -59,9 +93,6 @@ public class SecurityConfig {
 //                        .permitAll() // We re permitting all for login page
 //                )
 
-//                .oauth2ResourceServer((oauth2) -> oauth2
-//                        .jwt(Customizer.withDefaults())
-//                )
         ;
         return http.build();
     }
@@ -70,6 +101,27 @@ public class SecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
+        final OidcUserService delegate = new OidcUserService();
+
+        return (userRequest) -> {
+            // Delegate to the default implementation for loading a user
+            OidcUser oidcUser = delegate.loadUser(userRequest);
+
+            OAuth2AccessToken accessToken = userRequest.getAccessToken();
+            System.out.println("AccessToken: " + accessToken);
+            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+
+            // TODO
+            // 1) Fetch the authority information from the protected resource using accessToken
+            // 2) Map the authority information to one or more GrantedAuthority's and add it to mappedAuthorities
+
+            // 3) Create a copy of oidcUser but use the mappedAuthorities instead
+            oidcUser = new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
+
+            return oidcUser;
+        };
+    }
 //    @Bean PasswordEncoder passwordEncoder(){
 //        return new BCryptPasswordEncoder();
 //    }
