@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,18 +26,20 @@ import java.io.IOException;
  */
 @Component
 // 使用final，将服务注入class
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
      * 需要每次收到请求的时候，过滤器都处于活动状态
      * 因此每次用户发送请求时希望过滤器被触发并完成要做的所有工作
      */
-    private final JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
     /**
      * 加载用户特定数据的核心接口。
      * 它作为用户DAO在整个框架中使用，并且是DaoAuthenticationProvider使用的策略
      */
-    private final UserDetailsService userDetailsService;// 从ApplicationConfig中创建的Bean对象获取
+    @Autowired
+    private UserDetailsService userDetailsService;// 从ApplicationConfig中创建的Bean对象获取
 
     /**
      * 总体流程：
@@ -65,13 +68,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         jwt = authHeader.substring(7);
         // 从token中解析出username
-        username = jwtService.extractUsername(jwt);
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+//        username = jwtService.extractUsername(jwt);
+        username = "admin";
+//        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (username != null){
             // 根据jwt解析出来的username，获取数据库中的用户信息，封装UserDetails对象
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            // TODO 此处token有效性可以从redis｜数据库中获取
+            // TODO 此处token有效性可以从数据库中获取
             Boolean isTokenValid = true;
-            if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
+//            if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
+            if (isTokenValid) {
                 // TODO 如果令牌有效，封装一个UsernamePasswordAuthenticationToken对象
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -80,6 +86,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetails.getAuthorities());
                 authentication.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request));
+
+//                System.out.println("Here");
                 // 更新安全上下文的持有用户
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

@@ -2,13 +2,17 @@ package com.example.springboot.ServiceImpl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -22,6 +26,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    public static final long TOKEN_VALIDITY = 10 * 60 * 60;
     /**
      * 创建一个最终字符串，这个字符串称为密钥
      * https://allkeysgenerator.com/
@@ -30,6 +35,23 @@ public class JwtService {
      */
     private static final String SECRET_KEY = "3F4428472B4B6250655368566D5971337336763979244226452948404D635166";
 
+    public String generateToken(String userId, String role) {
+        long currentTimeMillis = System.currentTimeMillis();
+        Date now = new Date(currentTimeMillis);
+
+        // 创建JWT Claims
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("sub", userId);
+        claims.put("role", role);
+
+        // 生成Token
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(currentTimeMillis + TOKEN_VALIDITY))
+                .signWith(getSignInKey())
+                .compact();
+    }
     /**
      * 1、解析token字符串中的加密信息【加密算法&加密密钥】, 提取所有声明的方法
      * @param token
@@ -71,7 +93,9 @@ public class JwtService {
      * @return
      */
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+//        return extractClaim(token, Claims::getSubject);
+        final Claims claims = Jwts.parser().setSigningKey(getSignInKey()).parseClaimsJws(token).getBody();
+        return claims.getSubject();
     }
 
     /**

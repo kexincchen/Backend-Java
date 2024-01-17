@@ -1,15 +1,21 @@
 package com.example.springboot.Config;
 
+import com.example.springboot.Service.UserService;
+import com.example.springboot.ServiceImpl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 //import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 //import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,11 +23,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -38,7 +39,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,6 +55,9 @@ public class SecurityConfig {
     // 将自定义JwtAuthenticationFilter注入
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private UserDetailsServiceImpl userService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -68,22 +71,22 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 )
+//                .sessionManagement(session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-//                .oauth2Login(Customizer.withDefaults())
-                .oauth2Login(oauth2 -> oauth2
-
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .oidcUserService(this.oidcUserService())
-                    )
-                )
-                .oauth2ResourceServer((oauth2) -> oauth2
-                        .jwt(Customizer.withDefaults())
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2Login(Customizer.withDefaults())
+//                .oauth2Login(oauth2 -> oauth2
+//                        .userInfoEndpoint(userInfo -> userInfo
+//                                .oidcUserService(this.oidcUserService())
+//                    )
+//                )
+//                .oauth2ResourceServer((oauth2) -> oauth2
+//                        .jwt(Customizer.withDefaults())
+//                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//
 //                .formLogin(form -> form
 //                        .loginProcessingUrl("/login")
 //                        .usernameParameter("username")
@@ -107,7 +110,6 @@ public class SecurityConfig {
         return (userRequest) -> {
             // Delegate to the default implementation for loading a user
             OidcUser oidcUser = delegate.loadUser(userRequest);
-
             OAuth2AccessToken accessToken = userRequest.getAccessToken();
             System.out.println("AccessToken: " + accessToken);
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
@@ -115,41 +117,54 @@ public class SecurityConfig {
             // TODO
             // 1) Fetch the authority information from the protected resource using accessToken
             // 2) Map the authority information to one or more GrantedAuthority's and add it to mappedAuthorities
-
             // 3) Create a copy of oidcUser but use the mappedAuthorities instead
             oidcUser = new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
 
             return oidcUser;
         };
     }
+
+//    @Bean
+//    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+//        return new JwtAuthenticationFilter();
+//    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        // 创建一个用户认证提供者
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//        // 设置用户相信信息，可以从数据库中读取、或者缓存、或者配置文件
+//        authProvider.setUserDetailsService(userDetailsService());
+//        // 设置加密机制，若想要尝试对用户进行身份验证，我们需要知道使用的是什么编码
+//        authProvider.setPasswordEncoder(passwordEncoder());
+//        return authProvider;
+//    }
+//
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return username -> userService.loadUserByUsername(username);
+//    }
+
+
 //    @Bean PasswordEncoder passwordEncoder(){
 //        return new BCryptPasswordEncoder();
 //    }
 
 
 //    @Bean
-//    SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests((requests) -> requests.anyRequest().authenticated());
-//        //自定义用户信息获取实现
-//        http.oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfo -> userInfo.userService(new CustomOAuth2UserService())));
-//        http.oauth2Client(oauth2 -> oauth2.);
-//        return http.build();
-//    }
-
-
-
-//    @Bean
 //    public JwtDecoder jwtDecoder() {
 //        return JwtDecoders.fromIssuerLocation("https://my-auth-server.com");
 //    }
+
+
 //    @Autowired
 //    UserDetailsServiceImpl userService;
 
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> web.ignoring() //配置忽略掉的 URL 地址，一般对于静态文件，我们可以采用此操作
-//                .requestMatchers("/resources/**");
-//    }
 
 
 //    @Bean

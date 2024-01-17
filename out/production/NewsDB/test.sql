@@ -37,10 +37,11 @@ SHOW TABLES;
 -- ALTER TABLE Users
 -- ADD COLUMN Role VARCHAR(10);
 
-INSERT INTO Users (Nickname, Password, Role)
-VALUES ('user', 'user', 'USER');
-
-INSERT INTO Users (Nickname, Password, Role)
-VALUES ('admin', 'admin', 'ADMIN');
-
-    SELECT * FROM Users;
+-- INSERT INTO Users (Nickname, Password, Role)
+-- VALUES ('user', 'user', 'USER');
+--
+-- INSERT INTO Users (Nickname, Password, Role)
+-- VALUES ('admin', 'admin', 'ADMIN');
+--
+SELECT * FROM Users WHERE Nickname = 'admin' LIMIT 1;
+-- DELETE FROM Users WHERE UserID = 3;
