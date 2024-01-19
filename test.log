@@ -1,0 +1,104 @@
+2024-01-18T21:06:57.900+08:00  INFO 4097 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Starting AdminsysApplication using Java 20 with PID 4097 (/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes started by clarec in /Users/clarec/Documents/GitHub/SIMENS-SDE-Intern)
+2024-01-18T21:06:57.901+08:00  INFO 4097 --- [Test] [main] c.example.adminsys.AdminsysApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-01-18T21:06:58.595+08:00  INFO 4097 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-01-18T21:06:58.602+08:00  INFO 4097 --- [Test] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-18T21:06:58.602+08:00  INFO 4097 --- [Test] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-01-18T21:06:58.626+08:00  INFO 4097 --- [Test] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-18T21:06:58.627+08:00  INFO 4097 --- [Test] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 703 ms
+2024-01-18T21:06:58.924+08:00  WARN 4097 --- [Test] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-01-18T21:06:59.092+08:00 ERROR 4097 --- [Test] [main] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2024-01-18T21:06:59.286+08:00  INFO 4097 --- [Test] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2024-01-18T21:06:59.323+08:00  INFO 4097 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-01-18T21:06:59.338+08:00  INFO 4097 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Started AdminsysApplication in 1.68 seconds (process running for 2.382)
+2024-01-18T21:06:59.421+08:00  INFO 4097 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-18T21:06:59.421+08:00  INFO 4097 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-18T21:06:59.422+08:00  INFO 4097 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-01-18T21:07:51.302+08:00  INFO 4152 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Starting AdminsysApplication using Java 20 with PID 4152 (/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes started by clarec in /Users/clarec/Documents/GitHub/SIMENS-SDE-Intern)
+2024-01-18T21:07:51.304+08:00  INFO 4152 --- [Test] [main] c.example.adminsys.AdminsysApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-01-18T21:07:52.070+08:00  INFO 4152 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-01-18T21:07:52.077+08:00  INFO 4152 --- [Test] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-18T21:07:52.077+08:00  INFO 4152 --- [Test] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-01-18T21:07:52.103+08:00  INFO 4152 --- [Test] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-18T21:07:52.103+08:00  INFO 4152 --- [Test] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 758 ms
+2024-01-18T21:07:52.383+08:00  WARN 4152 --- [Test] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-01-18T21:07:52.545+08:00  INFO 4152 --- [Test] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2024-01-18T21:07:52.588+08:00  INFO 4152 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-01-18T21:07:52.602+08:00  INFO 4152 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Started AdminsysApplication in 1.89 seconds (process running for 2.494)
+2024-01-18T21:07:53.113+08:00  INFO 4152 --- [Test] [RMI TCP Connection(3)-192.168.100.109] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-18T21:07:53.113+08:00  INFO 4152 --- [Test] [RMI TCP Connection(3)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-18T21:07:53.114+08:00  INFO 4152 --- [Test] [RMI TCP Connection(3)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-01-18 21:12:06.780  INFO 4294 --- [main] c.example.adminsys.AdminsysApplication   : Starting AdminsysApplication on Clares-MacBook-Air.local with PID 4294 (/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes started by clarec in /Users/clarec/Documents/GitHub/SIMENS-SDE-Intern)
+2024-01-18 21:12:06.784  INFO 4294 --- [main] c.example.adminsys.AdminsysApplication   : No active profile set, falling back to default profiles: default
+2024-01-18 21:12:06.904  WARN 4294 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes/com/example/adminsys/AdminsysApplication.class]; nested exception is org.springframework.core.NestedIOException: ASM ClassReader failed to parse class file - probably due to a new Java class file version that isn't supported yet: file [/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes/com/example/adminsys/AdminsysApplication.class]; nested exception is java.lang.IllegalArgumentException: Unsupported class file major version 61
+2024-01-18 21:12:06.912 ERROR 4294 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes/com/example/adminsys/AdminsysApplication.class]; nested exception is org.springframework.core.NestedIOException: ASM ClassReader failed to parse class file - probably due to a new Java class file version that isn't supported yet: file [/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes/com/example/adminsys/AdminsysApplication.class]; nested exception is java.lang.IllegalArgumentException: Unsupported class file major version 61
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:452) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:315) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:276) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:132) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:296) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:319) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:236) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:280) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:707) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:533) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:405) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at com.example.adminsys.AdminsysApplication.main(AdminsysApplication.java:12) ~[classes/:na]
+Caused by: org.springframework.core.NestedIOException: ASM ClassReader failed to parse class file - probably due to a new Java class file version that isn't supported yet: file [/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes/com/example/adminsys/AdminsysApplication.class]; nested exception is java.lang.IllegalArgumentException: Unsupported class file major version 61
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:60) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:123) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:429) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Unsupported class file major version 61
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:196) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:177) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:163) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:284) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:57) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 25 common frames omitted
+
+2024-01-18T21:20:41.195+08:00  INFO 4586 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Starting AdminsysApplication using Java 20 with PID 4586 (/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes started by clarec in /Users/clarec/Documents/GitHub/SIMENS-SDE-Intern)
+2024-01-18T21:20:41.197+08:00  INFO 4586 --- [Test] [main] c.example.adminsys.AdminsysApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-01-18T21:20:41.927+08:00  INFO 4586 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-01-18T21:20:41.935+08:00  INFO 4586 --- [Test] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-18T21:20:41.935+08:00  INFO 4586 --- [Test] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-01-18T21:20:41.960+08:00  INFO 4586 --- [Test] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-18T21:20:41.961+08:00  INFO 4586 --- [Test] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 740 ms
+2024-01-18T21:20:42.263+08:00  WARN 4586 --- [Test] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-01-18T21:20:42.618+08:00 ERROR 4586 --- [Test] [main] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2024-01-18T21:20:42.738+08:00  INFO 4586 --- [Test] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2024-01-18T21:20:42.778+08:00  INFO 4586 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-01-18T21:20:42.793+08:00  INFO 4586 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Started AdminsysApplication in 1.825 seconds (process running for 2.361)
+2024-01-18T21:20:42.868+08:00  WARN 4586 --- [Test] [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=Test, managementUrl=http://192.168.100.109:8080/actuator, healthUrl=http://192.168.100.109:8080/actuator/health, serviceUrl=http://192.168.100.109:8080/) at spring-boot-admin ([http://localhost:8081/instances]): I/O error on POST request for "http://localhost:8081/instances": Connect to http://localhost:8081 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused. Further attempts are logged on DEBUG level
+2024-01-18T21:20:43.389+08:00  INFO 4586 --- [Test] [RMI TCP Connection(1)-192.168.100.109] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-18T21:20:43.389+08:00  INFO 4586 --- [Test] [RMI TCP Connection(1)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-18T21:20:43.390+08:00  INFO 4586 --- [Test] [RMI TCP Connection(1)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-01-18T21:26:18.211+08:00  INFO 4817 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Starting AdminsysApplication using Java 20 with PID 4817 (/Users/clarec/Documents/GitHub/SIMENS-SDE-Intern/adminsys/target/classes started by clarec in /Users/clarec/Documents/GitHub/SIMENS-SDE-Intern)
+2024-01-18T21:26:18.212+08:00  INFO 4817 --- [Test] [main] c.example.adminsys.AdminsysApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-01-18T21:26:19.010+08:00  INFO 4817 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-01-18T21:26:19.018+08:00  INFO 4817 --- [Test] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-18T21:26:19.018+08:00  INFO 4817 --- [Test] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-01-18T21:26:19.042+08:00  INFO 4817 --- [Test] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-18T21:26:19.042+08:00  INFO 4817 --- [Test] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 795 ms
+2024-01-18T21:26:19.359+08:00  WARN 4817 --- [Test] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-01-18T21:26:19.713+08:00 ERROR 4817 --- [Test] [main] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2024-01-18T21:26:19.832+08:00  INFO 4817 --- [Test] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2024-01-18T21:26:19.871+08:00  INFO 4817 --- [Test] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-01-18T21:26:19.886+08:00  INFO 4817 --- [Test] [main] c.example.adminsys.AdminsysApplication   : Started AdminsysApplication in 1.949 seconds (process running for 2.356)
+2024-01-18T21:26:19.947+08:00  WARN 4817 --- [Test] [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=Test, managementUrl=http://192.168.100.109:8080/actuator, healthUrl=http://192.168.100.109:8080/actuator/health, serviceUrl=http://192.168.100.109:8080/) at spring-boot-admin ([http://localhost:8081/instances]): I/O error on POST request for "http://localhost:8081/instances": Connect to http://localhost:8081 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused. Further attempts are logged on DEBUG level
+2024-01-18T21:26:19.991+08:00  INFO 4817 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-18T21:26:19.991+08:00  INFO 4817 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-18T21:26:19.992+08:00  INFO 4817 --- [Test] [RMI TCP Connection(2)-192.168.100.109] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

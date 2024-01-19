@@ -53,8 +53,8 @@ public class SecurityConfig {
 //    CustomOAuth2UserService userService;
 
     // 将自定义JwtAuthenticationFilter注入
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+//    @Autowired
+//    private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
     private UserDetailsServiceImpl userService;
 
@@ -85,7 +85,7 @@ public class SecurityConfig {
 //                .oauth2ResourceServer((oauth2) -> oauth2
 //                        .jwt(Customizer.withDefaults())
 //                )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 //
 //                .formLogin(form -> form
 //                        .loginProcessingUrl("/login")
