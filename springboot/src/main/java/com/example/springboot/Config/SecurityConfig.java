@@ -68,15 +68,15 @@ public class SecurityConfig {
 //                        .requestMatchers("/admin/**").hasAnyRole("admin")
                         //其他所有路径必须角色为admin才能访问
 //                        .anyRequest().hasRole("admin")
-                        .anyRequest().authenticated()
-//                        .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
 //                .sessionManagement(session -> session
 //                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+//                .formLogin(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .oauth2Login(Customizer.withDefaults())
+//                .oauth2Login(Customizer.withDefaults())
 //                .oauth2Login(oauth2 -> oauth2
 //                        .userInfoEndpoint(userInfo -> userInfo
 //                                .oidcUserService(this.oidcUserService())
