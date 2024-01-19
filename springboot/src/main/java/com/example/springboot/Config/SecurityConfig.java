@@ -5,6 +5,7 @@ import com.example.springboot.ServiceImpl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 //import org.springframework.security.authentication.AuthenticationManager;
@@ -56,6 +57,8 @@ public class SecurityConfig {
 //    @Autowired
 //    private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
+    private HeaderAuthFilter headerAuthFilter;
+    @Autowired
     private UserDetailsServiceImpl userService;
 
     @Bean
@@ -85,6 +88,7 @@ public class SecurityConfig {
 //                .oauth2ResourceServer((oauth2) -> oauth2
 //                        .jwt(Customizer.withDefaults())
 //                )
+//                .addFilterBefore(headerAuthFilter, UsernamePasswordAuthenticationFilter.class)
 //                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 //
 //                .formLogin(form -> form
@@ -133,6 +137,18 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
+
+
+//    @Bean
+//    public HttpHeadersProvider injectHeaders(){
+//        return instance -> {
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Authorization", "Bearer abc");
+//            return headers;
+//        };
+//    }
 
 //    @Bean
 //    public AuthenticationProvider authenticationProvider() {
