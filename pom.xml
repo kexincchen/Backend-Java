@@ -30,7 +30,6 @@
         <mybatisplus.version>3.5.5</mybatisplus.version>
         <skipTests>false</skipTests>
         <argLine>-Dfile.encoding=UTF-8</argLine>
-        <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
     </properties>
 
     <dependencyManagement>
