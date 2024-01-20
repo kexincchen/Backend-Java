@@ -1,17 +1,17 @@
 package com.example.adminsys;
 
-import de.codecentric.boot.admin.server.config.AdminServerProperties;
+
 import jakarta.servlet.DispatcherType;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -32,9 +32,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-//        successHandler.setTargetUrlParameter("redirectTo");
-//        successHandler.setDefaultTargetUrl("/");
+        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+        successHandler.setTargetUrlParameter("redirectTo");
+        successHandler.setDefaultTargetUrl("/");
 
         http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests //
                 .requestMatchers(new AntPathRequestMatcher("/assets/**"))
@@ -52,21 +52,24 @@ public class SecurityConfig {
                 .formLogin(
                         (formLogin) -> formLogin
                                 .loginPage("/login")
-//                                .successHandler(successHandler)
+                                .successHandler(successHandler)
                 )
                 .logout((logout) -> logout.logoutUrl("/logout"))
                 .httpBasic(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(csrf ->
+//                        csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/instances") // Disable CSRF for /instances
+//                ))
+                .csrf(csrf -> csrf.disable())
         ;
 
-        http.addFilterAfter(new CustomCsrfFilter(), BasicAuthenticationFilter.class)
-                .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
-                        .ignoringRequestMatchers(
-                                new AntPathRequestMatcher("/instances", POST.toString()),
-        new AntPathRequestMatcher("/instances/*", DELETE.toString()),
-        new AntPathRequestMatcher("/actuator/**")
-                                ))
+//        http.addFilterAfter(new CustomCsrfFilter(), BasicAuthenticationFilter.class)
+//                .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
+//                        .ignoringRequestMatchers(
+//                                new AntPathRequestMatcher("/instances", POST.toString()),
+//        new AntPathRequestMatcher("/instances/*", DELETE.toString()),
+//        new AntPathRequestMatcher("/actuator/**")
+//                                ))
         ;
 
         http.rememberMe((rememberMe) -> rememberMe.key(UUID.randomUUID().toString()).tokenValiditySeconds(1209600));
@@ -84,6 +87,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+//        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 }
