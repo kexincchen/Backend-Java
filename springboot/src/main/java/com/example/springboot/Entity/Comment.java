@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @TableName("Comments")
+@NoArgsConstructor
 public class Comment {
     @TableId(type = IdType.AUTO)
     private Long commentid;
@@ -18,9 +20,6 @@ public class Comment {
     private Long userID;
     private Integer numlikes;
     private Integer numdislikes;
-
-    public Comment() {
-    }
 
     public Comment(String content, Long newsID, Long userID) {
         this.content = content;

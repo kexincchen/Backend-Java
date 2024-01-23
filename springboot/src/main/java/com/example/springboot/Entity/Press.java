@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @TableName("News")
+@NoArgsConstructor
 public class Press {
     @TableId(type = IdType.AUTO)
     private Long newsid;
@@ -18,9 +20,6 @@ public class Press {
     private String body;
     @TableField(exist = false)
     private List<Advertisement> advertisements;
-
-    public Press() {
-    }
 
     public Press(Long id, String title, String body) {
         this.newsid = id;

@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @TableName("Users")
+@NoArgsConstructor
 public class User {
     @TableId(type = IdType.AUTO)
     private Long userid;
@@ -18,10 +20,6 @@ public class User {
     private String lastLogin;
     private String password;  // TODO: Encrypt then set
     private String role;
-
-    // No-argument constructor
-    public User() {
-    }
 
     public User(String nickname, String phoneNumber){
         this.nickname = nickname;
@@ -34,6 +32,13 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = "USER";
+    }
+
+    public User(String nickname, String password, Role role){
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.role = role.toString();
     }
 
     public String getUsername() {
