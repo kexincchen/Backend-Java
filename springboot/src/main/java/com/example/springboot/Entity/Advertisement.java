@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @TableName("Advertisements")
+@NoArgsConstructor
 public class Advertisement {
     @TableId(type = IdType.AUTO)
     private Long adid;
@@ -19,9 +21,6 @@ public class Advertisement {
     private Integer clickCount;
 
     private Long newsid;
-
-    public Advertisement() {
-    }
 
     public Advertisement(String title, String textContent, String placement, Long newsid) {
         this.title = title;

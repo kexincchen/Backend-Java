@@ -24,7 +24,7 @@ import java.util.function.Function;
  * @date 2023/3/3 11:16
  */
 @Service
-public class JwtService {
+public class JwtServiceImpl {
 
     public static final long TOKEN_VALIDITY = 10 * 60 * 60;
     /**

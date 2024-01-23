@@ -1,7 +1,7 @@
 package com.example.springboot.Controller;
 
 
-import com.example.springboot.ServiceImpl.JwtService;
+import com.example.springboot.Service.JwtService;
 import lombok.AllArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
