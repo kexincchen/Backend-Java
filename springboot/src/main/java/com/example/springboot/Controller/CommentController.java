@@ -29,9 +29,27 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Comment added successfully. \nID: " + comment.getCommentid());
     }
 
+    @PostMapping("/reply/{cid}")
+    public ResponseEntity<String> replyToComment(@PathVariable Long cid, @RequestParam String content, @RequestParam Long newsID, @RequestParam Long userID) {
+        Comment comment = commentService.replyToComment(cid, content, newsID, userID);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Comment replied successfully. \nID: " + comment.getCommentid());
+    }
+
     @DeleteMapping("/{cid}")
     public ResponseEntity<String> deleteCommentByID(@PathVariable Long cid) {
         commentService.deleteCommentByID(cid);
         return ResponseEntity.ok("Comment deleted successfully");
+    }
+
+    @PutMapping("/{cid}/like")
+    public ResponseEntity<String> likeCommentByID(@PathVariable Long cid){
+        commentService.likeCommentByID(cid);
+        return ResponseEntity.ok("Comment liked successfully");
+    }
+
+    @PutMapping("/{cid}/dislike")
+    public ResponseEntity<String> dislikeCommentByID(@PathVariable Long cid){
+        commentService.dislikeCommentByID(cid);
+        return ResponseEntity.ok("Comment liked successfully");
     }
 }

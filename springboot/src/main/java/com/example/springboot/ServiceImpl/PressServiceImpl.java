@@ -50,4 +50,35 @@ public class PressServiceImpl implements PressService {
     public List<Press> getAllPressWithAdvertisements() {
         return pressMapper.selectAllPressWithAdvertisements();
     }
+
+    private void updatePressByOp(Long id, String op){
+        Press press = pressMapper.selectById(id);
+        if (press != null){
+            if (op.equals("CLICK")){
+                press.clickOnce();
+            } else if (op.equals("LIKE")){
+                press.likeOnce();
+            } else if (op.equals("SHARE")){
+                press.shareOnce();
+            } else {
+                throw new IllegalStateException("Invalid Operation with press: " + id);
+            }
+        } else {
+            throw new IllegalStateException("Press not found with id: " + id);
+        }
+    }
+    @Override
+    public void clickPressByID(Long id) {
+        updatePressByOp(id, "CLICK");
+    }
+
+    @Override
+    public void sharePressByID(Long id) {
+        updatePressByOp(id, "SHARE");
+    }
+
+    @Override
+    public void likePressByID(Long id) {
+        updatePressByOp(id, "LIKE");
+    }
 }

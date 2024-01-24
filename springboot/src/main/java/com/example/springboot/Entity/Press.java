@@ -98,6 +98,18 @@ public class Press {
         this.publishDatetime = publishDatetime;
     }
 
+    public void clickOnce(){
+        viewCount += 1;
+    }
+
+    public void shareOnce(){
+        shareCount += 1;
+    }
+
+    public void likeOnce(){
+        favoriteCount += 1;
+    }
+
     @Override
     public String toString() {
         String adDetails = advertisements == null ? "No advertisements" :

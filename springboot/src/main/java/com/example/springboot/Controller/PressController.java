@@ -50,5 +50,24 @@ public class PressController {
         pressService.updatePress(id, title, body);
         return ResponseEntity.ok("Press updated successfully");
     }
+
+    @PutMapping("/{id}/click")
+    public ResponseEntity<String> clickPressByID(@PathVariable Long id){
+        pressService.clickPressByID(id);
+        return ResponseEntity.ok("Press clicked successfully");
+    }
+
+    @PutMapping("/{id}/share")
+    public ResponseEntity<String> sharePressByID(@PathVariable Long id){
+        pressService.sharePressByID(id);
+        return ResponseEntity.ok("Press shared successfully");
+    }
+
+    @PutMapping("/{id}/like")
+    public ResponseEntity<String> likePressByID(@PathVariable Long id){
+        pressService.likePressByID(id);
+        return ResponseEntity.ok("Press liked successfully");
+    }
+
 }
 

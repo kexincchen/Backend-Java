@@ -20,7 +20,7 @@
 | `<GET>`    | `/comment/all`          | 获取所有评论      | &check; | |
 | `<POST>`   | `/comment/add`          | 发布评论        | &check;  | |
 | `<DELETE>` | `/comment/<id>`         | 删除评论        | &check;  | |
-| `<POST>`   | `/comment/reply`        | 回复评论        |  | |
+| `<POST>`   | `/comment/reply/<id>`   | 回复评论        |  | |
 | `<PUT>`    | `/comment/<id>/like`    | 点赞评论        |  | |
 | `<PUT>`    | `/comment/<id>/dislike` | 点踩评论        |  | |
 

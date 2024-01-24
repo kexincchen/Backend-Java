@@ -21,4 +21,10 @@ public interface PressService {
 
     List<Press> getAllPressWithAdvertisements();
 
+    void clickPressByID(Long id);
+
+    void sharePressByID(Long id);
+
+    void likePressByID(Long id);
+
 }

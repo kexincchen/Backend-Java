@@ -20,8 +20,8 @@ public class Comment {
     private Long newsID;
     @TableField("UserID")
     private Long userID;
-    private Integer numlikes;
-    private Integer numdislikes;
+    private Integer numlikes = 0;
+    private Integer numdislikes = 0;
     @TableField("CommentTime")
     private Date commentTime;
     @TableField("ReferenceCommentID")
@@ -31,8 +31,6 @@ public class Comment {
         this.content = content;
         this.newsID = newsID;
         this.userID = userID;
-        this.numdislikes = 0;
-        this.numlikes = 0;
     }
 
     public void setCommentid(Long commentid) {
@@ -59,6 +57,13 @@ public class Comment {
         this.numdislikes = numdislikes;
     }
 
+    public void likeOnce(){
+        numlikes += 1;
+    }
+
+    public void dislikeOnce(){
+        numdislikes += 1;
+    }
     @Override
     public String toString() {
         return "{" +
