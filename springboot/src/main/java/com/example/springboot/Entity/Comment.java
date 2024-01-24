@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @TableName("Comments")
 @NoArgsConstructor
@@ -20,6 +22,10 @@ public class Comment {
     private Long userID;
     private Integer numlikes;
     private Integer numdislikes;
+    @TableField("CommentTime")
+    private Date commentTime;
+    @TableField("ReferenceCommentID")
+    private Long referenceCommentID;
 
     public Comment(String content, Long newsID, Long userID) {
         this.content = content;

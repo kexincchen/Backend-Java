@@ -138,7 +138,12 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
+        hierarchy.setHierarchy("ROLE_admin > ROLE_user");
+        return hierarchy;
+    }
 
 
 //    @Bean
@@ -225,14 +230,6 @@ public class SecurityConfig {
 //                .password("{noop}admin")
 //                .roles("ADMIN").build());
 //        return manager;
-//    }
-
-
-//    @Bean
-//    RoleHierarchy roleHierarchy() {
-//        RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
-//        hierarchy.setHierarchy("ROLE_admin > ROLE_user");
-//        return hierarchy;
 //    }
 
 //    @Bean

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,19 @@ public class Press {
     private Long newsid;
     private String title;
     private String body;
+    @TableField("CoverImageUrl")
+    private String coverImageUrl;
+    private String author;
+    @TableField("ViewCount")
+    private Integer viewCount = 0;
+    @TableField("FavoriteCount")
+    private Integer favoriteCount = 0;
+    @TableField("ShareCount")
+    private Integer shareCount = 0;
+    @TableField("PaidPromotion")
+    private Boolean paidPromotion = false;
+    @TableField("PublishDatetime")
+    private Date publishDatetime;
     @TableField(exist = false)
     private List<Advertisement> advertisements;
 
@@ -54,6 +68,34 @@ public class Press {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public void setFavoriteCount(Integer favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
+    public void setShareCount(Integer shareCount) {
+        this.shareCount = shareCount;
+    }
+
+    public void setPaidPromotion(Boolean paidPromotion) {
+        this.paidPromotion = paidPromotion;
+    }
+
+    public void setPublishDatetime(Date publishDatetime) {
+        this.publishDatetime = publishDatetime;
     }
 
     @Override

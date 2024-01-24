@@ -4,8 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.springboot.Util.GlobalExceptionHandler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Data
 @TableName("Users")
@@ -17,9 +23,11 @@ public class User {
     @TableField("PhoneNumber")
     private String phoneNumber;
     @TableField("LastLogin")
-    private String lastLogin;
+    private Date lastLogin;
     private String password;  // TODO: Encrypt then set
     private String role;
+    @TableField("AvatarUrl")
+    private String avatarURL;
 
     public User(String nickname, String phoneNumber){
         this.nickname = nickname;
@@ -64,9 +72,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
-    }
 
     public void setUserid(Long userid) {
         this.userid = userid;
@@ -76,7 +81,20 @@ public class User {
         this.password = password;
     }
 
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setAvatarURL(String avatarURL) {
+        this.avatarURL = avatarURL;
+    }
+
     public void setRole(String role) {
-        this.role = role;
+        List<String> roles = Arrays.stream(Role.values()).map(Objects::toString).toList();
+        if (roles.contains(role)){
+            this.role = role;
+        } else {
+            System.out.println("Error: setting role invalid");
+        }
     }
 }

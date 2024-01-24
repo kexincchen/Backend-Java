@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @TableName("Advertisements")
 @NoArgsConstructor
@@ -19,8 +21,15 @@ public class Advertisement {
     private Placement placement;
     @TableField("ClickCount")
     private Integer clickCount;
-
     private Long newsid;
+    @TableField("ImageUrl")
+    private String imageUrl;
+    private Long advertiserid;
+    @TableField("ValidUntil")
+    private Date validUntil;
+    @TableField("ExposureCount")
+    private Integer exposureCount;
+    private Integer weight;
 
     public Advertisement(String title, String textContent, String placement, Long newsid) {
         this.title = title;
@@ -52,6 +61,30 @@ public class Advertisement {
 
     public void setClickCount(Integer clickCount) {
         this.clickCount = clickCount;
+    }
+
+    public void setNewsid(Long newsid) {
+        this.newsid = newsid;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setAdvertiserid(Long advertiserid) {
+        this.advertiserid = advertiserid;
+    }
+
+    public void setValidUntil(Date validUntil) {
+        this.validUntil = validUntil;
+    }
+
+    public void setExposureCount(Integer exposureCount) {
+        this.exposureCount = exposureCount;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     @Override
